@@ -14,7 +14,6 @@ PokemonListItem.defaultProps = {
   onClick: () => {},
 };
 
-
 PokemonListItem.propTypes = {
   children: PropTypes.node.isRequired,
   onClick: PropTypes.func,

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { PokemonDetail, PokemonList } from './components';
 import './App.css';
 
@@ -8,16 +8,30 @@ const mockPokemonList = [
   { name: 'Squirtle', url: 'squirtle.com' },
 ];
 
-const mockPokemon = {
-  name: 'Bulbasaur',
-};
 
+class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { selectedPokemon: mockPokemonList[0] };
+    this.selectPokemon = this.selectPokemon.bind(this);
+  }
 
-const App = () => (
-  <div className="app">
-    <PokemonList pokemon={mockPokemonList} />
-    <PokemonDetail pokemon={mockPokemon} />
-  </div>
-);
+  selectPokemon(name) {
+    this.setState({ selectedPokemon: mockPokemonList.find(p => p.name === name) });
+  }
+
+  render() {
+    return (
+      <div className="app">
+        <PokemonList
+          onItemClick={this.selectPokemon}
+          pokemon={mockPokemonList}
+        />
+        <PokemonDetail pokemon={this.state.selectedPokemon} />
+      </div>
+    );
+  }
+}
+
 
 export default App;
